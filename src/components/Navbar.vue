@@ -8,10 +8,10 @@
                 </li>
                 <span id="mensaje"> </span>
                 <li class="nav-item active">
-                    <button  href="#" id="easy" class="selected" @click="easyButtonFunc">Easy</button>
+                    <button  href="#" id="easy" class="selected easyHeard" @click="easyButtonFunc">Easy</button>
                 </li>
-                <li class="nav-item active selected">
-                    <button href="#" id="hard" class="selected" @click="hardButtonFunc">Hard</button>
+                <li class="nav-item active">
+                    <button href="#" id="hard" class="selected easyHeard" @click="hardButtonFunc">Hard</button>
                 </li>
                 </ul>
                 
@@ -194,12 +194,16 @@ import Color from './Color.vue'
 
     .navigator {
         background: #ffffff;
-        height: 30px;
+        height: 10px;
         text-align: center;
         margin: 0;
         margin-top: -12px;
         padding-top: 10px;
         margin-left: 350px;
+    }
+
+    .easyHeard {
+        margin-left: 500%;
     }
 
     .selected {
