@@ -9,8 +9,6 @@
     </div> 
     <Navbar :header="header" @header="header=$event" />   
   </div>
-  
-  
 </template>
 
 <script>
@@ -27,22 +25,17 @@ export default {
   },
   data () {
     return {
-      /*object: {
-        colorDisplay: document.getElementById("colorDisplay"),
-        header:  document.getElementById("header"),
-      }*/
       colorDisplay: document.getElementById("colorDisplay"),
       header:  document.getElementById("header"),
     }
   },
-
   methods: {
-    
   }
 }
 </script>
 
 <style scoped lang="css">
+
 .header {
       transition: all 0.3s;
       text-transform: uppercase;
@@ -55,4 +48,5 @@ export default {
 #colorDisplay {
       font-size: 150%;
 }
+
 </style>

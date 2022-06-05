@@ -65,7 +65,6 @@ import Color from './Color.vue'
     },
 
     data () {
-       
       return {
         colorCount: 6,
         isHard: true,
@@ -168,6 +167,7 @@ import Color from './Color.vue'
 
 </script>
 <style scoped lang="css">
+
    .message {
         color: steelblue;
         display: inline-block;
@@ -199,6 +199,7 @@ import Color from './Color.vue'
         margin: 0;
         margin-top: -12px;
         padding-top: 10px;
+        margin-left: 350px;
     }
 
     .selected {

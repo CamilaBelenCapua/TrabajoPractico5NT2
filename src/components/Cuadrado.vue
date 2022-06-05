@@ -1,8 +1,5 @@
 <template>
-
   <section class="src-componentes-Cuadrado">
-   
-      
       <div id="container">
         <div class="square"></div>
         <div class="square"></div>
@@ -11,13 +8,10 @@
         <div class="square"></div>
         <div class="square"></div>
       </div>
-
   </section>
-
 </template>
 
 <script lang="js">
-
   export default  {
     name: 'src-componentes-Cuadrado',
     props: [],
@@ -33,8 +27,6 @@
     computed: {
     }
 }
-
-
 </script>
 
 <style scoped lang="css">

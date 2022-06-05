@@ -2,7 +2,6 @@
   <div class="container-fluid mt-3">
     <div>
       <Color/>
-	    <!--<Navbar/>-->
 	    <Cuadrado/>
     </div> 
   </div>
@@ -14,7 +13,6 @@ import Color from './components/Color.vue'
 import Navbar from './components/Navbar.vue'
 import Cuadrado from './components/Cuadrado.vue'
 
-
 export default {
   name: 'App',
   components: {
@@ -24,7 +22,6 @@ export default {
   }
 }
 </script>
-
 
 <style scoped lang="css">
 
