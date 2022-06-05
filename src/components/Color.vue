@@ -1,43 +1,43 @@
 <template>
   <div class="hello">
-    	<div class="header">
+    	<div class="header" id="header">
         <h1>The Great 
           <br>
-          <span>RGB</span>
+          <span id="colorDisplay">RGB</span>
           <br>
             Guessing Game</h1>
-    </div>    
+    </div> 
+    <Navbar :header="header" @header="header=$event" />   
   </div>
+  
+  
 </template>
 
 <script>
+
+import Navbar from './Navbar.vue'
+
 export default {
   name: 'Color',
+  components : {
+    Navbar
+  },
   props: [],
   mounted () {
   },
   data () {
     return {
-  }
+      /*object: {
+        colorDisplay: document.getElementById("colorDisplay"),
+        header:  document.getElementById("header"),
+      }*/
+      colorDisplay: document.getElementById("colorDisplay"),
+      header:  document.getElementById("header"),
+    }
   },
 
   methods: {
-     createNewColors(numbers){
-        var arr = [];
-        for (var i = 0; i < numbers; i++) {
-            arr.push(createRandomStringColor());
-        }
-        return arr;
-    },
-
-    createRandomStringColor(){
-        var newColor = "rgb(" + randomInt() + ", " + randomInt() + ", " + randomInt() + ")" ;
-        return newColor;
-    },
-
-    randomInt(){
-        return Math.floor(Math.random() * 256);
-    }
+    
   }
 }
 </script>
@@ -52,7 +52,7 @@ export default {
       color: white;  
 }
 
-.colorDisplay {
-      font-size: 200%;
+#colorDisplay {
+      font-size: 150%;
 }
 </style>

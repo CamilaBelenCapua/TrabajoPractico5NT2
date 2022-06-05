@@ -4,129 +4,167 @@
             <div class="collapse navbar-collapse navigator" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <button href="#">News Colors </button>
+                    <button href="#" id="reset" @click="restartButtonFun">News Colors </button>     
                 </li>
+                <span id="mensaje"> </span>
                 <li class="nav-item active">
-                    <button  href="#">Easy</button>
+                    <button  href="#" id="easy" class="selected" @click="easyButtonFunc">Easy</button>
                 </li>
                 <li class="nav-item active selected">
-                    <button href="#" @click="easyButton">Hard</button>
+                    <button href="#" id="hard" class="selected" @click="hardButtonFunc">Hard</button>
                 </li>
                 </ul>
+                
             </div>
         </nav>
     </section>
 </template>
 
 <script lang="js">
+import Cuadrado from './Cuadrado.vue'
+import Color from './Color.vue'
+
   export default  {
     name: 'src-components-navbar',
-    props: [],
-    mounted () {
+    components : {
+        Cuadrado,
+        Color
     },
+    props: ['header'],
+
+    mounted () {
+        this.colorDisplay = Color.data().colorDisplay,
+        this.squares = Cuadrado.data().squares,
+        this.messageDisplay = document.querySelector("#mensaje")
+        this.easyButton = document.querySelector("#easy"),
+        this.hardButton = document.querySelector("#hard"),
+        this.restartButton = document.querySelector("#reset"),
+        this.colors = this.createNewColors(this.colorCount);
+        this.pickedColor = this.colors[this.PickColor()]
+        this.colorDisplay.textContent = this.pickedColor;
+        
+        for (var i = 0; i <this.squares.length; i++) {
+            this.squares[i].style.backgroundColor = this.colors[i]
+            this.squares[i].addEventListener("click", event => {
+                var square = event.path[0]
+                var clickedColor = square.style.backgroundColor;
+                
+                if (clickedColor === this.pickedColor) {
+                    this.messageDisplay.textContent = "You Picked Right!";
+                    this.setAllColorsTo(this.pickedColor);
+                    this.restartButton.textContent = "Play Again!";
+                    header.style.backgroundColor = this.pickedColor;
+                } else {
+                    square.style.backgroundColor = "#FFFFFF";
+                    this.messageDisplay.textContent = "Try Again!";
+                    this.messageDisplay.style.color = "#000000";
+                }
+            });
+       }
+        
+    },
+
     data () {
+       
       return {
         colorCount: 6,
         isHard: true,
         colors: [],
-        //squares: document.querySelectorAll(".square"),
-        //colorDisplay: document.getElementById("colorDisplay"),
-        //messageDisplay: document.getElementById("message"),
-        //pickedColor: colors[PickColor()],
-        //h1: document.querySelector("h1"),
-        //restartButton: document.querySelector("#reset"),
-        //header: document.querySelector("#header"),
-        //easyButton: document.querySelector("#easy"),
-        //hardButton: document.querySelector("#hard")*/
+        squares: null,
+        messageDisplay: null,
+        colorDisplay: null,
+        pickedColor: null,
+        restartButton: null,
+        easyButton: null,
+        hardButton: null
       }
     },
 
     methods: {
-      easyButton(){
-        if (isHard) {
-            isHard = false;
-            easyButton.classList.add("selected");
-            hardButton.classList.remove("selected");
-            colorCount = 3;
-            for (var i = 0; i < colorCount; i++) {
-                squares[(i+3)].style.display = "none";
+      easyButtonFunc(){
+        if (this.isHard) {
+            this.isHard = false;
+            this.easyButton.classList.add("selected");
+            this.hardButton.classList.remove("selected");
+            this.colorCount = 3;
+            for (var i = 0; i < this.colorCount; i++) {
+                this.squares[(i+3)].style.display = "none";
+            }
         }
-        }
-           restart();
+           this.restart();
        },
 
-         hardButton(){
-            if (!isHard) {
-                isHard = true;
-                hardButton.classList.add("selected");
-                easyButton.classList.remove("selected");
-                colorCount = 6;
-                restart();
-                for (var i = 3; i < 6; i++) {
-                    squares[i].style.display = "block";
-                }
+      hardButtonFunc(){
+        if (!this.isHard) {
+            this.isHard = true;
+            this.hardButton.classList.add("selected");
+            this.easyButton.classList.remove("selected");
+            this.colorCount = 6;
+            this.restart();
+            for (var i = 3; i < 6; i++) {
+                this.squares[i].style.display = "block";
             }
-        },
+        }
     },
 
-
-    restartButton(){
-	    //restart();
+    restartButtonFun(){
+	    this.restart();
     },
 
-    init(){
-       /* for (var i = 0; i <squares.length; i++) {
-            console.log(colors[i])
-           //squares[i].style.backgroundColor = colors[i];
-            //squares[i].addEventListener("click", function(){
-            var clickedColor = this.style.backgroundColor;
-		if (clickedColor === pickedColor) {
-			//.textContent = "You Picked Right!";
-			setAllColorsTo(pickedColor);
-			restartButton.textContent = "Play Again!";
-			//header.style.backgroundColor = pickedColor;
-		} else {
-			this.style.backgroundColor = "#232323";
-			//messageDisplay.textContent = "Try Again!";
-			//messageDisplay.style.color = "#000000";
-		}*/
-        
-    },
-    
-    //setAllColorsTo(color) {
-       /* squares.forEach(function (square){
+    setAllColorsTo(color) {
+       this.squares.forEach(function (square){
             square.style.backgroundColor = color;
-        })*/
-    //},
+        })
+    },
 
     PickColor(){
-        //var quantity;
-      /*  if (isHard) {
+        var quantity;
+        if (this.isHard) {
             quantity = 6;
         } else {
             quantity = 3;
         }
-        return Math.floor(Math.random() * quantity );*/
+        return Math.floor(Math.random() * quantity );
     },
 
 
     restart(){
-        colors = createNewColors(colorCount);
-        pickedColor = colors[PickColor()];
-        colorDisplay.textContent = pickedColor;
+        console.log('Entro al restart')
+        this.colors = this.createNewColors(this.colorCount);
+        this.pickedColor = this.colors[this.PickColor()];
+        this.colorDisplay.textContent = this.pickedColor;
         this.textContent = "Pick New Colors!";
         header.style.backgroundColor = "steelblue";
-        messageDisplay.textContent = "";
-        restartButton.textContent = "New Colors!";
-        for (var i = 0; i <squares.length; i++) {
-            squares[i].style.backgroundColor = colors[i];
+        this.messageDisplay.textContent = "";
+        this.restartButton.textContent = "New Colors!";
+     
+        for (var i = 0; i <this.squares.length; i++) {
+            this.squares[i].style.backgroundColor = this.colors[i];
         }
+       
+    },
+
+    createNewColors(numbers){
+        var arr = [];
+        for (var i = 0; i < numbers; i++) {
+            arr.push(this.createRandomStringColor());
+        }
+        return arr;
+    },
+
+    createRandomStringColor(){
+        var newColor = "rgb(" + this.randomInt() + ", " + this.randomInt() + ", " + this.randomInt() + ")" ;
+        return newColor;
+    },
+
+    randomInt(){
+        return Math.floor(Math.random() * 256);
     }
-}  
+},  
     computed: {
 
     }
-
+}    
 
 </script>
 <style scoped lang="css">
@@ -163,41 +201,11 @@
         padding-top: 10px;
     }
 
-     .selected {
+    .selected {
         background-color: steelblue;
         color: white;
     }
 
-   /* h1 {
-        font-weight: normal;
-        line-height: 1.1;
-        padding: 20px 0;
-
-    }*/
-
-    
-   /*#colorDisplay {
-        font-size: 200%;
-    }*/
-
-/*
-    .square {
-        width: 30%;
-        background: blue;
-        padding-bottom: 30%;
-        float: left;
-        margin: 1.66%;
-        border-radius: 10%;
-        transition: background 0.8s;
-        -webkit-transition: background 0.8s;
-        -moz-transition: background 0.8s;
-
-    }
-    #container {
-        margin: 20px auto;
-        max-width: 600px;
-    }
-    */
 </style>
 
 

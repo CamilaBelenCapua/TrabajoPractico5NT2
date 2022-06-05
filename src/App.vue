@@ -2,7 +2,7 @@
   <div class="container-fluid mt-3">
     <div>
       <Color/>
-	    <Navbar/>
+	    <!--<Navbar/>-->
 	    <Cuadrado/>
     </div> 
   </div>
@@ -25,6 +25,7 @@ export default {
 }
 </script>
 
-<style>
+
+<style scoped lang="css">
 
 </style>
